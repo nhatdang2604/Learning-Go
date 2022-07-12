@@ -1,10 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+)
 
 func main() {
-	fmt.Printf("Floating: %07d \r\n", 123)
-	var out string = fmt.Sprintf("Floating: %7d", 123)
-	fmt.Printf(out)
+	scanner := bufio.NewScanner(os.Stdin)
+	// fmt.Printf("Type something: ")
+	// scanner.Scan()
+	// input := scanner.Text()
+	// fmt.Printf("You typed: %q", input)
+
+	fmt.Printf("Type an integer number: ")
+	scanner.Scan()
+	input, _ := strconv.ParseInt(scanner.Text(), 10, 32)
+	fmt.Printf("You typed: %d", input)
 
 }
