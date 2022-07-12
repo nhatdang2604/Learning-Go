@@ -3,12 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	//var name string = "Tim";
-	//var number = 2000.98
-	//number := "hello";
-	//number = "str";	//invalid
-	//fmt.Printf("%T", number)
-	var number uint64
-	var bl bool
-	fmt.Println(number, bl)
+	fmt.Printf("Floating: %07d \r\n", 123)
+	var out string = fmt.Sprintf("Floating: %7d", 123)
+	fmt.Printf(out)
+
 }
