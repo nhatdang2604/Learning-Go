@@ -5,13 +5,18 @@ import (
 )
 
 func main() {
-	ans := -1
-	switch {
-	case ans > 0:
-		fmt.Println("Greater than 0")
-	case ans < 0:
-		fmt.Println("Less than 0")
-	default:
-		fmt.Println("zero")
+	var arr []int = []int{4, 5, 6}
+	var arr2d [][]int = [][]int{{1, 2}, {3, 4}}
+
+	fmt.Println(arr)
+	fmt.Println(arr2d)
+
+	sum := []int{0, 0}
+	var size int = len(arr2d)
+	for i := 0; i < size; i++ {
+		sum[0] += arr2d[i][0]
+		sum[1] += arr2d[i][1]
 	}
+
+	fmt.Println(sum)
 }
