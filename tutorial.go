@@ -5,8 +5,8 @@ import (
 )
 
 func main() {
-	var num1 int = 9
-	var num2 int = 0
-	answer := num1 % num2
-	fmt.Printf("%d", answer)
+	var a = "tim"
+	var b = "Tim"
+	answer := a > b
+	fmt.Printf("%t", answer)
 }
