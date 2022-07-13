@@ -5,8 +5,6 @@ import (
 )
 
 func main() {
-	var a = "tim"
-	var b = "Tim"
-	answer := a > b
-	fmt.Printf("%t", answer)
+	val := 5 < 8
+	fmt.Printf("%t", val)
 }
