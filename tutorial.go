@@ -14,13 +14,36 @@ func test() int {
 	return testBody()
 }
 
-func addAndMinus(x, y int) (add, minus int) {
-	add = x + y
-	minus = x - y
-	return
+func binary_operator(functor func(int, int) int) func(int, int) int {
+	return functor
+}
+
+//closure
+func test1(x string) func() {
+	return func() {
+		fmt.Println(x)
+	}
 }
 
 func main() {
-	fmt.Println(addAndMinus(12, 13))
-	fmt.Println(test())
+	x := test
+	x()
+	fmt.Printf("%T\n", x)
+
+	//annonymouse function
+	test0 := func() string {
+		return "Hello"
+	}()
+
+	fmt.Println(test0)
+	//test0()
+
+	adder := func(a, b int) int {
+		return a + b
+	}
+
+	dummy := binary_operator(adder)
+	fmt.Println(dummy(2, 3))
+
+	test1("Hê hê")()
 }
