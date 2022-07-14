@@ -5,18 +5,21 @@ import (
 )
 
 func main() {
-	var a []int = []int{1, 3, 4, 56, 7, 12, 4, 6}
-	for i := 0; i < len(a); i++ {
-		fmt.Println(a[i])
+	var mp map[string]int = map[string]int{
+		"apple":  5,
+		"pear":   6,
+		"orange": 9,
 	}
 
-	for i, element := range a {
-		element = -1
-		fmt.Println(i, element)
-	}
+	delete(mp, "apple")
+	mp["pear"] = 1234
+	fmt.Println(mp)
+	fmt.Println(mp["apple"])
 
-	// for i := range a {
-	// 	fmt.Println(i)
-	// }
-	fmt.Println(a)
+	val, err := mp["apocalypse"]
+	fmt.Println(val, err)
+
+	for key, value := range mp {
+		fmt.Println(key, value)
+	}
 }
