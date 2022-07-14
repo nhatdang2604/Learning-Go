@@ -5,14 +5,18 @@ import (
 )
 
 func main() {
-	var x []int = []int{1, 2, 3, 4, 5}
-	var s []int = x[1:3]
-	b := append(s, 10)
-	b[0] = 123
-	fmt.Print(x[:cap(x)])
-	fmt.Println(s[:cap(s)])
-	fmt.Println(b)
+	var a []int = []int{1, 3, 4, 56, 7, 12, 4, 6}
+	for i := 0; i < len(a); i++ {
+		fmt.Println(a[i])
+	}
 
-	a := make([]int, 5)
+	for i, element := range a {
+		element = -1
+		fmt.Println(i, element)
+	}
+
+	// for i := range a {
+	// 	fmt.Println(i)
+	// }
 	fmt.Println(a)
 }
