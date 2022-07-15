@@ -4,19 +4,24 @@ import (
 	"fmt"
 )
 
-func changeFirst(slice []int) {
-	slice[0] = 1000
+func changeValue0(value *int) {
+	*value = 10
 }
 
-func changePrimitiveValue(value int) {
-	value = 100
+func changeString0(value string) {
+	value = "hehehehhe"
+}
+
+func changeString1(value *string) {
+	(*value) += "hoho"
 }
 
 func main() {
-	var x []int = []int{3, 4, 5}
-	y := 1
-	changeFirst(x)
-	changePrimitiveValue(y)
-	fmt.Println(x, y)
-
+	x := 7
+	str := "hello world"
+	changeValue0(&x)
+	changeString0(str)
+	fmt.Println(x, str, &str)
+	changeString1(&str)
+	fmt.Println(str, &str)
 }
