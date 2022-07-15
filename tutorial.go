@@ -1,27 +1,32 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-func changeValue0(value *int) {
-	*value = 10
+type Point struct {
+	x int32
+	y int32
 }
 
-func changeString0(value string) {
-	value = "hehehehhe"
+type Circle struct {
+	center *Point
+	radius float32
 }
 
-func changeString1(value *string) {
-	(*value) += "hoho"
+//Spreading like js
+type SpreadingCircle struct {
+	*Point
+	radius float32
+}
+
+func changePoint(point Point) {
+	point.x = 123
+	point.y = 456
 }
 
 func main() {
-	x := 7
-	str := "hello world"
-	changeValue0(&x)
-	changeString0(str)
-	fmt.Println(x, str, &str)
-	changeString1(&str)
-	fmt.Println(str, &str)
+	var center Point = Point{y: 1, x: 2}
+	var circle Circle = Circle{radius: 2, center: &center}
+	var spread_circle SpreadingCircle = SpreadingCircle{&Point{1, 2}, 4}
+	changePoint(center)
+	fmt.Println(circle, center, spread_circle.x, spread_circle.y, spread_circle.radius)
 }
