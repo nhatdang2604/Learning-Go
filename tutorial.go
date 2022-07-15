@@ -4,46 +4,19 @@ import (
 	"fmt"
 )
 
-func testBody() int {
-	fmt.Println("Inside testBody()")
-	return -2
+func changeFirst(slice []int) {
+	slice[0] = 1000
 }
 
-func test() int {
-	defer fmt.Println("test")
-	return testBody()
-}
-
-func binary_operator(functor func(int, int) int) func(int, int) int {
-	return functor
-}
-
-//closure
-func test1(x string) func() {
-	return func() {
-		fmt.Println(x)
-	}
+func changePrimitiveValue(value int) {
+	value = 100
 }
 
 func main() {
-	x := test
-	x()
-	fmt.Printf("%T\n", x)
+	var x []int = []int{3, 4, 5}
+	y := 1
+	changeFirst(x)
+	changePrimitiveValue(y)
+	fmt.Println(x, y)
 
-	//annonymouse function
-	test0 := func() string {
-		return "Hello"
-	}()
-
-	fmt.Println(test0)
-	//test0()
-
-	adder := func(a, b int) int {
-		return a + b
-	}
-
-	dummy := binary_operator(adder)
-	fmt.Println(dummy(2, 3))
-
-	test1("Hê hê")()
 }
