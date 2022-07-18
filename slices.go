@@ -1,6 +1,5 @@
 package main
 
-
 import (
 	"golang.org/x/tour/pic"
 )
@@ -10,10 +9,10 @@ func Pic(dx, dy int) [][]uint8 {
 	for i := range image {
 		image[i] = make([]uint8, dx)
 		for j := range image[i] {
-			image[i][j] = uint8((i+j)/2);
+			image[i][j] = uint8((i + j) / 2)
 		}
 	}
-	
+
 	return image
 }
 
