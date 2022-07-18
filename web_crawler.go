@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 )
 
 type Fetcher interface {
@@ -16,28 +17,60 @@ func Crawl(url string, depth int, fetcher Fetcher) {
 	// TODO: Fetch URLs in parallel.
 	// TODO: Don't fetch the same URL twice.
 	// This implementation doesn't do either:
+
+	defer waitor.Done()
+
 	if depth <= 0 {
 		return
 	}
 
 	body, urls, err := fetcher.Fetch(url)
+
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	fmt.Printf("found: %s %q\n", url, body)
+
 	for _, u := range urls {
-		Crawl(u, depth-1, fetcher)
+		waitor.Add(1)
+		go Crawl(u, depth-1, fetcher)
 	}
+
 	return
 }
 
 func main() {
+	waitor.Add(1)
 	Crawl("https://golang.org/", 4, fetcher)
+	waitor.Wait()
 }
 
 // fakeFetcher is Fetcher that returns canned results.
 type fakeFetcher map[string]*fakeResult
+
+//flag to to check, if a url is visted
+type VisitedMap struct {
+	value map[string]bool
+	mutex sync.Mutex
+}
+
+//Check if an url is visted
+func (mp VisitedMap) isVisited(url string) bool {
+	mp.mutex.Lock()
+	defer mp.mutex.Unlock()
+
+	_, ok := mp.value[url]
+	return ok
+}
+
+//Visit an url
+func (mp VisitedMap) visit(url string) {
+	mp.mutex.Lock()
+	defer mp.mutex.Unlock()
+
+	mp.value[url] = true
+}
 
 type fakeResult struct {
 	body string
@@ -50,6 +83,8 @@ func (f fakeFetcher) Fetch(url string) (string, []string, error) {
 	}
 	return "", nil, fmt.Errorf("not found: %s", url)
 }
+
+var waitor = sync.WaitGroup{}
 
 // fetcher is a populated fakeFetcher.
 var fetcher = fakeFetcher{
