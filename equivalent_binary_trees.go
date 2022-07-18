@@ -9,10 +9,10 @@ func Walk(t *tree.Tree, ch chan int) {
 		return
 	}
 
-	ch <- t.Value
 	Walk(t.Left)
 	Walk(t.Right)
 
+	ch <- t.Value
 }
 
 // Same determines whether the trees
