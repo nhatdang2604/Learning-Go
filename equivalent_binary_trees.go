@@ -1,6 +1,10 @@
 package main
 
-import "golang.org/x/tour/tree"
+import (
+	"fmt"
+
+	"golang.org/x/tour/tree"
+)
 
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
@@ -50,4 +54,6 @@ func Same(t1, t2 *tree.Tree) bool {
 }
 
 func main() {
+	fmt.Println(Same(tree.New(1), tree.New(1)))
+	fmt.Println(Same(tree.New(1), tree.New(2)))
 }
